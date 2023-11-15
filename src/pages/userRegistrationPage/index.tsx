@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { MainLayout } from '@/layout/mainLayout';
+
 export function UserRegistrationPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -28,51 +30,61 @@ export function UserRegistrationPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
-      <br />
-      <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </label>
-      <br />
-      <label>
-        Role:
-        <br />
+    <MainLayout>
+      <form onSubmit={handleSubmit}>
         <label>
-          <input
-            type="radio"
-            value="buyer"
-            checked={role === 'buyer'}
-            onChange={handleRoleChange}
-          />
-          Buyer
+          Username:
+          <input type="text" value={username} onChange={handleUsernameChange} />
         </label>
         <br />
         <label>
-          <input
-            type="radio"
-            value="seller"
-            checked={role === 'seller'}
-            onChange={handleRoleChange}
-          />
-          Seller
+          Email:
+          <input type="email" value={email} onChange={handleEmailChange} />
         </label>
-      </label>
-      <br />
-      <button type="submit">Register</button>
-    </form>
+        <br />
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+        </label>
+        <br />
+        <label>
+          Role:
+          <br />
+          <label>
+            <input
+              type="radio"
+              value="buyer"
+              checked={role === 'buyer'}
+              onChange={handleRoleChange}
+            />
+            Buyer
+          </label>
+          <br />
+          <label>
+            <input
+              type="radio"
+              value="seller"
+              checked={role === 'seller'}
+              onChange={handleRoleChange}
+            />
+            Seller
+          </label>
+        </label>
+        <br />
+        <button type="submit">Register</button>
+      </form>
+      <div>
+        <span className="text-sm text-muted-foreground">
+          Already have an account?
+          <a className="font-bold hover:underline ml-1" href="/login">
+            Log in here
+          </a>
+        </span>
+      </div>
+    </MainLayout>
   );
 }

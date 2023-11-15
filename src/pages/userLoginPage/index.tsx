@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { MainLayout } from '@/layout/mainLayout';
+
 interface User {
   username: string;
   password: string;
@@ -19,7 +21,7 @@ export function UserLoginPage() {
   };
 
   return (
-    <div>
+    <MainLayout>
       <h1>User Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -44,6 +46,14 @@ export function UserLoginPage() {
         <br />
         <button type="submit">Login</button>
       </form>
-    </div>
+      <div>
+        <span className="text-sm text-muted-foreground">
+          Don't have an account yet?
+          <a className="font-bold hover:underline ml-1" href="/register">
+            Sign up here
+          </a>
+        </span>
+      </div>
+    </MainLayout>
   );
 }
