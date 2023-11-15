@@ -1,3 +1,7 @@
+import { RouterProvider } from 'react-router-dom';
+
+import { router } from './router';
+
 export function App() {
-  return <h1>Vending Machine</h1>;
+  return <RouterProvider router={router} />;
 }
