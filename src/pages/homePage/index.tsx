@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 
+import { useAuth } from '@/hooks/useAuth';
 import { MainLayout } from '@/layout/mainLayout';
 
 export function HomePage() {
+  const { isSignedIn } = useAuth();
   const navigate = useNavigate();
 
   const handleLoginClick = () => {
@@ -15,10 +17,14 @@ export function HomePage() {
 
   return (
     <MainLayout>
-      <>
-        <button onClick={handleLoginClick}>Login</button>
-        <button onClick={handleRegisterClick}>Register</button>
-      </>
+      {isSignedIn ? (
+        <></>
+      ) : (
+        <>
+          <button onClick={handleLoginClick}>Login</button>
+          <button onClick={handleRegisterClick}>Register</button>
+        </>
+      )}
     </MainLayout>
   );
 }
