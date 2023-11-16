@@ -31,22 +31,34 @@ export function AuthDialog() {
   return (
     <Dialog open={showForm} onOpenChange={onFormOpenChange}>
       <DialogTrigger asChild>
-        <div className="flex flex-1 items-center justify-center">
-          <div className="flex flex-1 gap-4 p-4 sm:max-w-[425px] items-center justify-center">
-            <Button
-              className="flex flex-1"
-              onClick={onLoginClick}
-              variant="outline"
-            >
-              Login
-            </Button>
-            <Button
-              className="flex flex-1"
-              onClick={onRegisterClick}
-              variant="ghost"
-            >
-              Register
-            </Button>
+        <div className="flex flex-col flex-1 py-6">
+          <div className="flex flex-col flex-1 items-center justify-center">
+            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+              Vending Machine
+            </h1>
+            <p className="leading-7 [&:not(:first-child)]:mt-6">
+              Craving a quick snack? Look no further! Introducing the
+              cutting-edge vending machine app that brings your favourite snacks
+              and drinks to your fingertips.
+            </p>
+          </div>
+          <div className="flex flex-1 items-center justify-center py-2">
+            <div className="flex flex-1 gap-4 p-4 sm:max-w-[425px] items-center justify-center">
+              <Button
+                className="flex flex-1"
+                onClick={onLoginClick}
+                variant="outline"
+              >
+                Login
+              </Button>
+              <Button
+                className="flex flex-1"
+                onClick={onRegisterClick}
+                variant="ghost"
+              >
+                Register
+              </Button>
+            </div>
           </div>
         </div>
       </DialogTrigger>
