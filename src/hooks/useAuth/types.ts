@@ -19,9 +19,9 @@ export type SignUpUser = {
 
 export type AuthContextData = {
   isSignedIn: boolean;
-  signIn: (email: string, password: string) => Promise<void>;
-  signOut: () => Promise<void>;
-  signUp: (user: SignUpUser) => Promise<void>;
+  signIn: (email: string, password: string) => Promise<boolean>;
+  signOut: () => Promise<boolean>;
+  signUp: (user: SignUpUser) => Promise<boolean>;
   user: User | null;
   userIdToken: string | null;
 };

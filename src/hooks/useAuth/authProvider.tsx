@@ -11,17 +11,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
     console.log(newUser);
     setUser(null);
     setUserIdToken('');
+    return true;
   }
 
   async function signIn(email: string, password: string) {
     console.log(email, password);
     setUser(null);
     setUserIdToken('');
+    return true;
   }
 
   async function signOut() {
     setUser(null);
     setUserIdToken(null);
+    return true;
   }
 
   return (
