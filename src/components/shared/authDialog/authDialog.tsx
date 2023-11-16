@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 import { LoginForm } from './loginForm';
+import { RegisterForm } from './registerForm';
 import { FormType } from './types';
 
 export function AuthDialog() {
@@ -51,6 +52,9 @@ export function AuthDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         {formType === 'login' ? <LoginForm closeForm={closeForm} /> : null}
+        {formType === 'register' ? (
+          <RegisterForm closeForm={closeForm} />
+        ) : null}
       </DialogContent>
     </Dialog>
   );
