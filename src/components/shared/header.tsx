@@ -1,32 +1,28 @@
-import { Github } from 'lucide-react';
+import { LogOut, UserCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+import { useAuth } from '@/hooks/useAuth';
 
 export function Header() {
+  const { signOut, user } = useAuth();
+
   return (
     <div className="px-6 py-3 flex items-center justify-between border-b">
       <h1 className="font-bold text-xl">Vending Machine</h1>
 
       <div className="flex items-center gap-3">
-        <span className="text-sm text-muted-foreground">
-          Developed by
-          <a
-            className="font-bold hover:underline ml-1"
-            href="https://github.com/felipefa"
-          >
-            @felipefa
-          </a>
+        <UserCircle className="h-4 w-4" />
+        <span className="font-bold text-sm text-muted-foreground">
+          {user?.username}
         </span>
 
         <Separator className="h-6" orientation="vertical" />
 
-        <a href="https://github.com/felipefa/vending-machine-web">
-          <Button variant="outline">
-            <Github className="h-4 w-4 mr-2" />
-            GitHub
-          </Button>
-        </a>
+        <Button onClick={signOut} variant="destructive">
+          <LogOut className="h-4 w-4 mr-2" />
+          Sign out
+        </Button>
       </div>
     </div>
   );
