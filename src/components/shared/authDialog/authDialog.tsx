@@ -1,14 +1,20 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import vendingMachineSvg from '@/assets/vending-machine.svg';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { useAuth } from '@/hooks/useAuth';
 
 import { LoginForm } from './loginForm';
 import { RegisterForm } from './registerForm';
 import { FormType } from './types';
 
 export function AuthDialog() {
+  const navigate = useNavigate();
+
+  const { user } = useAuth();
+
   const [formType, setFormType] = React.useState<FormType>(null);
 
   const showForm = formType !== null;
@@ -28,6 +34,12 @@ export function AuthDialog() {
   function onRegisterClick() {
     setFormType('register');
   }
+
+  React.useEffect(() => {
+    if (navigate && user?.role) {
+      navigate(`/${user.role}`);
+    }
+  }, [navigate, user]);
 
   return (
     <Dialog open={showForm} onOpenChange={onFormOpenChange}>

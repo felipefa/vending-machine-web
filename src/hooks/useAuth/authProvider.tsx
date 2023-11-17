@@ -92,6 +92,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setUser(null);
       setUserIdToken(null);
 
+      window.location.reload();
+
       return true;
     } catch (error) {
       console.log(error);

@@ -5,13 +5,14 @@ import { Button } from '@/components/ui/button';
 import { DialogHeader } from '@/components/ui/dialog';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useAuth } from '@/hooks/useAuth';
 
 import { RegisterFormProps, UserRole } from './types';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 
 export function RegisterForm({ closeForm }: RegisterFormProps) {
   const { signUp } = useAuth();
+
   const [email, setEmail] = React.useState<string>('');
   const [emailError, setEmailError] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
