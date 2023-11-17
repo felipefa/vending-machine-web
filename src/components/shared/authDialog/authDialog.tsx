@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import vendingMachineSvg from '@/assets/vending-machine.svg';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
@@ -31,30 +32,33 @@ export function AuthDialog() {
   return (
     <Dialog open={showForm} onOpenChange={onFormOpenChange}>
       <DialogTrigger asChild>
-        <div className="flex flex-col flex-1 py-6">
-          <div className="flex flex-col flex-1 items-center justify-center">
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-              Vending Machine
-            </h1>
-            <p className="leading-7 [&:not(:first-child)]:mt-6">
-              Craving a quick snack? Look no further! Introducing the
-              cutting-edge vending machine app that brings your favourite snacks
-              and drinks to your fingertips.
+        <div className="flex flex-col flex-1 text-center justify-center py-6">
+          <div className="flex items-center justify-center min-w-full">
+            <img className="sm:max-w-[425px]" src={vendingMachineSvg} />
+          </div>
+          <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+            Vending Machine
+          </h1>
+          <div className="flex flex-col py-6 justify-center min-w-full [&:not(:first-child)]:mt-6 md:max-w-lg">
+            <p className="text-xl">Craving a quick snack? Look no further!</p>
+            <p className="text-xl">
+              Introducing the cutting-edge vending machine app that brings your
+              favourite snacks and drinks to your fingertips.
             </p>
           </div>
-          <div className="flex flex-1 items-center justify-center py-2">
+          <div className="flex items-center justify-center py-2">
             <div className="flex flex-1 gap-4 p-4 sm:max-w-[425px] items-center justify-center">
               <Button
                 className="flex flex-1"
                 onClick={onLoginClick}
-                variant="outline"
+                variant="default"
               >
                 Login
               </Button>
               <Button
                 className="flex flex-1"
                 onClick={onRegisterClick}
-                variant="ghost"
+                variant="outline"
               >
                 Register
               </Button>
