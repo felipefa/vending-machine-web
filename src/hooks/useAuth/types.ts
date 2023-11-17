@@ -19,6 +19,7 @@ export type SignUpUser = {
 };
 
 export type AuthContextData = {
+  depositFormatted?: string;
   isSignedIn: boolean;
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => boolean;

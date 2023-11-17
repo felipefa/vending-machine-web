@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { userIdTokenStorage, userStorage } from '@/services/localStorage';
 import { usersService } from '@/services/users';
+import { formatCurrency } from '@/utils/formatCurrency';
 
 import { AuthContext } from './authContext';
 import { AuthProviderProps, SignUpUser, User } from './types';
@@ -9,6 +10,8 @@ import { AuthProviderProps, SignUpUser, User } from './types';
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = React.useState<User | null>(null);
   const [userIdToken, setUserIdToken] = React.useState<string | null>(null);
+
+  const depositFormatted = formatCurrency(user?.deposit);
 
   async function signUp(newUser: SignUpUser) {
     try {
@@ -118,6 +121,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
   return (
     <AuthContext.Provider
       value={{
+        depositFormatted,
         isSignedIn: !!userIdToken,
         signIn,
         signOut,
