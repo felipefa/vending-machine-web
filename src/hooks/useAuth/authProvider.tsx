@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import { userIdTokenStorage, userStorage } from '@/services/localStorage';
 import { usersService } from '@/services/users';
 
 import { AuthContext } from './authContext';
@@ -19,22 +20,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
           newUser.password
         );
 
-        if (
-          userLoginRequest.status === 200 &&
-          userLoginRequest.data.user &&
-          userLoginRequest.data.userIdToken
-        ) {
-          setUser(userLoginRequest.data.user as User);
-          setUserIdToken(userLoginRequest.data.userIdToken as string);
+        const user = userLoginRequest.data.user as User;
+        const userIdToken = userLoginRequest.data.userIdToken as string;
 
-          sessionStorage.setItem(
-            'user',
-            JSON.stringify(userLoginRequest.data.user)
-          );
-          sessionStorage.setItem(
-            'userIdToken',
-            userLoginRequest.data.userIdToken
-          );
+        if (userLoginRequest.status === 200 && user && userIdToken) {
+          setUser(user);
+          setUserIdToken(userIdToken);
+
+          userStorage.set(user);
+          userIdTokenStorage.set(userIdToken);
 
           return true;
         } else {
@@ -46,8 +40,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } catch (error) {
       console.log(error);
 
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('userIdToken');
+      userStorage.remove();
+      userIdTokenStorage.remove();
 
       setUser(null);
       setUserIdToken(null);
@@ -60,22 +54,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     try {
       const userLoginRequest = await usersService.login(email, password);
 
-      if (
-        userLoginRequest.status === 200 &&
-        userLoginRequest.data.user &&
-        userLoginRequest.data.userIdToken
-      ) {
-        setUser(userLoginRequest.data.user as User);
-        setUserIdToken(userLoginRequest.data.userIdToken as string);
+      const user = userLoginRequest.data.user as User;
+      const userIdToken = userLoginRequest.data.userIdToken as string;
 
-        sessionStorage.setItem(
-          'user',
-          JSON.stringify(userLoginRequest.data.user)
-        );
-        sessionStorage.setItem(
-          'userIdToken',
-          userLoginRequest.data.userIdToken
-        );
+      if (userLoginRequest.status === 200 && user && userIdToken) {
+        setUser(user);
+        setUserIdToken(userIdToken);
+
+        userStorage.set(user);
+        userIdTokenStorage.set(userIdToken);
 
         return true;
       } else {
@@ -84,8 +71,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
     } catch (error) {
       console.log(error);
 
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('userIdToken');
+      userStorage.remove();
+      userIdTokenStorage.remove();
 
       setUser(null);
       setUserIdToken(null);
@@ -96,8 +83,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   function signOut() {
     try {
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('userIdToken');
+      userStorage.remove();
+      userIdTokenStorage.remove();
 
       setUser(null);
       setUserIdToken(null);
@@ -113,11 +100,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   React.useEffect(() => {
     function checkSessionStorage() {
       try {
-        const user = sessionStorage.getItem('user');
-        const userIdToken = sessionStorage.getItem('userIdToken');
+        const user = userStorage.get();
+        const userIdToken = userIdTokenStorage.get();
 
         if (user && userIdToken) {
-          setUser(JSON.parse(user));
+          setUser(user);
           setUserIdToken(userIdToken);
         }
       } catch (error) {
