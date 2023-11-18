@@ -8,7 +8,7 @@ export const usersService = {
       headers: { Authorization: `Bearer ${userIdToken}` },
     }),
   update: (username: string, userIdToken: string) =>
-    api.put('/users', {
+    api.patch('/users', {
       headers: { Authorization: `Bearer ${userIdToken}` },
       data: { username },
     }),
