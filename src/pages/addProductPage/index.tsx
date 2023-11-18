@@ -1,10 +1,16 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useAuth } from '@/hooks/useAuth';
+import { productsService } from '@/services/products';
 
 export function AddProductPage() {
+  const { userIdToken } = useAuth();
+  const navigate = useNavigate();
+
   const [amountAvailable, setAmountAvailable] = React.useState<string>('');
   const [amountAvailableError, setAmountAvailableError] =
     React.useState<string>('');
@@ -12,6 +18,7 @@ export function AddProductPage() {
   const [costError, setCostError] = React.useState<string>('');
   const [productName, setProductName] = React.useState<string>('');
   const [productNameError, setProductNameError] = React.useState<string>('');
+  const [requestError, setRequestError] = React.useState<string>('');
 
   function onChangeAmountAvailable(event: React.ChangeEvent<HTMLInputElement>) {
     const { value } = event.target;
@@ -32,26 +39,51 @@ export function AddProductPage() {
   }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    if (!productName) {
-      setProductNameError('Product name is required');
-    }
+      if (!productName) {
+        setProductNameError('Product name is required');
+      }
 
-    if (!cost) {
-      setCostError('Cost is required');
-    } else if (Number.isNaN(Number(cost))) {
-      setCostError('Cost must be a number');
-    } else if (Number(cost) <= 0) {
-      setCostError('Cost must be greater than 0');
-    }
+      if (!cost) {
+        setCostError('Cost is required');
+      } else if (Number.isNaN(Number(cost))) {
+        setCostError('Cost must be a number');
+      } else if (Number(cost) <= 0) {
+        setCostError('Cost must be greater than 0');
+      }
 
-    if (!amountAvailable) {
-      setAmountAvailableError('Amount is required');
-    } else if (Number.isNaN(Number(amountAvailable))) {
-      setAmountAvailableError('Amount must be a number');
-    } else if (Number(amountAvailable) <= 0) {
-      setAmountAvailableError('Amount must be greater than 0');
+      if (!amountAvailable) {
+        setAmountAvailableError('Amount is required');
+      } else if (Number.isNaN(Number(amountAvailable))) {
+        setAmountAvailableError('Amount must be a number');
+      } else if (Number(amountAvailable) <= 0) {
+        setAmountAvailableError('Amount must be greater than 0');
+      }
+
+      if (!userIdToken) {
+        return;
+      }
+
+      const response = await productsService.create(
+        {
+          amountAvailable: Number(amountAvailable),
+          cost: Number(cost),
+          productName,
+        },
+        userIdToken
+      );
+
+      if (response.status === 201) {
+        navigate('/manage-products');
+      } else {
+        setRequestError('Something went wrong. Please try again later');
+      }
+    } catch (error) {
+      console.error(error);
+
+      setRequestError('Something went wrong. Please try again later');
     }
   }
 
@@ -71,7 +103,7 @@ export function AddProductPage() {
           </p>
         </div>
         <div className="py-2">
-          <Label htmlFor="cost">Cost</Label>
+          <Label htmlFor="cost">Cost (in cents)</Label>
           <Input id="cost" onChange={onChangeCost} value={cost} />
           <p className="py-1 text-sm text-muted-foreground text-red-300">
             {costError}
@@ -93,6 +125,9 @@ export function AddProductPage() {
             Add product
           </Button>
         </div>
+        <p className="py-1 text-sm text-muted-foreground text-red-300">
+          {requestError}
+        </p>
       </form>
     </div>
   );
