@@ -7,15 +7,17 @@ import { useAuth } from '@/hooks/useAuth';
 export function Header() {
   const { depositFormatted, signOut, user } = useAuth();
 
+  const isBuyer = user?.role === 'buyer';
+
   return (
     <div className="px-6 py-3 flex items-center justify-between border-b">
       <h1 className="font-bold text-xl">Vending Machine</h1>
 
       <div className="flex items-center gap-3">
         <UserCircle className="h-4 w-4" />
-        <span className="font-bold text-sm text-muted-foreground">
+        <span className="font-bold text-muted-foreground">
           {user?.username}{' '}
-          <span className="font-normal">({depositFormatted})</span>
+          {isBuyer && <span className="font-normal">({depositFormatted})</span>}
         </span>
 
         <Separator className="h-6" orientation="vertical" />
