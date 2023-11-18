@@ -105,7 +105,7 @@ export function AddEditProductForm({
         );
 
         if (response.status === 200) {
-          callbackOnSuccess?.();
+          callbackOnSuccess?.(response.data.product);
         } else {
           setRequestError('Something went wrong. Please try again later');
         }

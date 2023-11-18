@@ -1,4 +1,4 @@
-import { Pencil, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@/hooks/useAuth';
 import { productsService } from '@/services/products';
 
+import { EditProductDialog } from './components/editProductDialog';
 import { Product } from './types';
 
 export function ManageProductsPage() {
@@ -87,9 +88,10 @@ export function ManageProductsPage() {
                   {product.amountAvailable}
                 </TableCell>
                 <TableCell className="text-right">
-                  <Button variant="outline">
-                    <Pencil className="h-4 w-4" />
-                  </Button>
+                  <EditProductDialog
+                    product={product}
+                    setProducts={setProducts}
+                  />
                 </TableCell>
                 <TableCell className="text-right">
                   <Button
