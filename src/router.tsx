@@ -30,6 +30,16 @@ export const router = createBrowserRouter([
         element: <SellerHomePage />,
         loader: checkLogin,
       },
+      {
+        path: 'add-product',
+        element: <div>Add Product</div>,
+        loader: checkLogin,
+      },
+      {
+        path: 'manage-products',
+        element: <div>Manage Products</div>,
+        loader: checkLogin,
+      },
     ],
   },
 ]);
