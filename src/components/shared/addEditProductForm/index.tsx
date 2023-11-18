@@ -18,11 +18,11 @@ export function AddEditProductForm({
   const navigate = useNavigate();
 
   const [amountAvailable, setAmountAvailable] = React.useState<string>(
-    String(product?.amountAvailable) || ''
+    String(product?.amountAvailable || '')
   );
   const [amountAvailableError, setAmountAvailableError] =
     React.useState<string>('');
-  const [cost, setCost] = React.useState<string>(String(product?.cost) || '');
+  const [cost, setCost] = React.useState<string>(String(product?.cost || ''));
   const [costError, setCostError] = React.useState<string>('');
   const [productName, setProductName] = React.useState<string>(
     product?.productName || ''
