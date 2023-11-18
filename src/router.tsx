@@ -1,9 +1,10 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 
 import { MainLayout } from '@/layout/mainLayout';
-import { LandingPage } from '@/pages/landingPage';
-import { SellerHomePage } from '@/pages/sellerHomePage';
 import { AddProductPage } from '@/pages/addProductPage';
+import { LandingPage } from '@/pages/landingPage';
+import { ManageProductsPage } from '@/pages/manageProductPage';
+import { SellerHomePage } from '@/pages/sellerHomePage';
 import { userIdTokenStorage } from '@/services/localStorage';
 
 async function checkLogin() {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'manage-products',
-        element: <div>Manage Products</div>,
+        element: <ManageProductsPage />,
         loader: checkLogin,
       },
     ],
