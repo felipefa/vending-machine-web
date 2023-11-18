@@ -17,12 +17,12 @@ export function SellerHomePage() {
   return (
     <div className="flex flex-col sm:flex-row flex-1 flex-wrap items-center justify-center gap-6 p-4">
       <CardMenuItem
-        label="Add Product"
+        label="Add product"
         icon={<PackagePlus className="w-16 h-16" />}
         onClick={handleAddProductClick}
       />
       <CardMenuItem
-        label="Manage Products"
+        label="Manage products"
         icon={<Package className="w-16 h-16" />}
         onClick={handleManageProductsClick}
       />

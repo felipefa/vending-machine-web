@@ -3,6 +3,7 @@ import { createBrowserRouter, redirect } from 'react-router-dom';
 import { MainLayout } from '@/layout/mainLayout';
 import { LandingPage } from '@/pages/landingPage';
 import { SellerHomePage } from '@/pages/sellerHomePage';
+import { AddProductPage } from '@/pages/addProductPage';
 import { userIdTokenStorage } from '@/services/localStorage';
 
 async function checkLogin() {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'add-product',
-        element: <div>Add Product</div>,
+        element: <AddProductPage />,
         loader: checkLogin,
       },
       {
