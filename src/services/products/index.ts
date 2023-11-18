@@ -4,7 +4,8 @@ import { ProductData } from './types';
 
 export const productsService = {
   create: (data: ProductData, userIdToken: string) =>
-    api.post('/products', {
+    api('/products', {
+      method: 'POST',
       headers: { Authorization: `Bearer ${userIdToken}` },
       data,
     }),
@@ -15,12 +16,14 @@ export const productsService = {
     data: Partial<ProductData>,
     userIdToken: string
   ) =>
-    api.patch(`/products/${productId}`, {
+    api(`/products/${productId}`, {
+      method: 'PATCH',
       headers: { Authorization: `Bearer ${userIdToken}` },
       data,
     }),
   delete: (productId: string, userIdToken: string) =>
-    api.delete(`/products/${productId}`, {
+    api(`/products/${productId}`, {
+      method: 'DELETE',
       headers: { Authorization: `Bearer ${userIdToken}` },
     }),
 };
