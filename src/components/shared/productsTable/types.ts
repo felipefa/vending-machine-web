@@ -5,3 +5,7 @@ export type Product = {
   productName: string;
   sellerId: string;
 };
+
+export type ProductsTableProps = {
+  mode: 'manage' | 'buy';
+};
