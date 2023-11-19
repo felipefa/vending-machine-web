@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import { AddEditProductForm } from '@/components/shared/addEditProductForm';
 
-import { Product } from '../../types';
+import { Product } from '../types';
 import { EditProductDialogProps } from './types';
 
 export function EditProductDialog({
