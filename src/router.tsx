@@ -2,6 +2,7 @@ import { createBrowserRouter, redirect } from 'react-router-dom';
 
 import { MainLayout } from '@/layout/mainLayout';
 import { AddProductPage } from '@/pages/addProductPage';
+import { BuyerHomePage } from '@/pages/buyerHomePage';
 import { LandingPage } from '@/pages/landingPage';
 import { ManageProductsPage } from '@/pages/manageProductPage';
 import { SellerHomePage } from '@/pages/sellerHomePage';
@@ -40,6 +41,11 @@ export const router = createBrowserRouter([
       {
         path: 'manage-products',
         element: <ManageProductsPage />,
+        loader: checkLogin,
+      },
+      {
+        path: 'buyer',
+        element: <BuyerHomePage />,
         loader: checkLogin,
       },
     ],
