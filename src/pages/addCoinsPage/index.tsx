@@ -8,11 +8,9 @@ import { formatCurrency } from '@/utils/formatCurrency';
 import { coinsService } from '@/services/coins';
 
 export function AddCoinsPage() {
-  const { updateDeposit, user, userIdToken } = useAuth();
+  const { depositFormatted, updateDeposit, userIdToken } = useAuth();
 
   const [requestError, setRequestError] = React.useState<string>('');
-
-  const depositFormatted = formatCurrency(user?.deposit || 0);
 
   async function handleOnCoinClick(coin: Coin) {
     try {
@@ -39,14 +37,33 @@ export function AddCoinsPage() {
     }
   }
 
+  async function handleOnResetClick() {
+    try {
+      if (!userIdToken) {
+        throw new Error('Missing user token');
+      }
+
+      const response = await coinsService.reset(userIdToken);
+
+      if (response.status === 200) {
+        updateDeposit(0);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="flex flex-col sm:flex-row flex-1 gap-6 items-center justify-center">
       <div className="flex flex-col items-center">
         <p className="text-xl text-muted-foreground">Balance</p>
         <p className="text-5xl font-bold py-2">{depositFormatted}</p>
+        <Button onClick={handleOnResetClick} variant="ghost">
+          Reset
+        </Button>
       </div>
       <Separator className="w-16 sm:rotate-90" />
-      <div>
+      <div className="mb-8">
         <p className="text-xl text-muted-foreground">Add coin</p>
         <div className="flex flex-1 gap-4 py-2">
           {coins.map((coin) => (

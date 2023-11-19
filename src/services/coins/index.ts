@@ -9,4 +9,9 @@ export const coinsService = {
       headers: { Authorization: `Bearer ${userIdToken}` },
       data: { coin },
     }),
+  reset: (userIdToken: string) =>
+    api('/reset', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${userIdToken}` },
+    }),
 };

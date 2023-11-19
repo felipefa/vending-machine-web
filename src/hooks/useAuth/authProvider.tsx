@@ -11,10 +11,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = React.useState<User | null>(null);
   const [userIdToken, setUserIdToken] = React.useState<string | null>(null);
 
-  const depositFormatted = formatCurrency(user?.deposit);
+  const depositFormatted = React.useMemo(
+    () => formatCurrency(user?.deposit ?? 0),
+    [user?.deposit]
+  );
 
   function updateDeposit(deposit: number) {
-    setUser((oldUser) => (oldUser ? ({ ...user, deposit } as User) : oldUser));
+    setUser((oldUser) => {
+      if (oldUser) {
+        const newUser = { ...oldUser, deposit };
+
+        userStorage.set(newUser);
+
+        return newUser;
+      }
+
+      return oldUser;
+    });
   }
 
   async function signUp(newUser: SignUpUser) {
