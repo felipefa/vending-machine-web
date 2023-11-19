@@ -3,6 +3,7 @@ import { createBrowserRouter, redirect } from 'react-router-dom';
 import { MainLayout } from '@/layout/mainLayout';
 import { AddProductPage } from '@/pages/addProductPage';
 import { BuyerHomePage } from '@/pages/buyerHomePage';
+import { BuyProductsPage } from '@/pages/buyProductsPage';
 import { LandingPage } from '@/pages/landingPage';
 import { ManageProductsPage } from '@/pages/manageProductsPage';
 import { SellerHomePage } from '@/pages/sellerHomePage';
@@ -46,6 +47,11 @@ export const router = createBrowserRouter([
       {
         path: 'buyer',
         element: <BuyerHomePage />,
+        loader: checkLogin,
+      },
+      {
+        path: 'buy-products',
+        element: <BuyProductsPage />,
         loader: checkLogin,
       },
     ],
