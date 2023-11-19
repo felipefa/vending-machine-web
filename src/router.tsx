@@ -4,7 +4,7 @@ import { MainLayout } from '@/layout/mainLayout';
 import { AddProductPage } from '@/pages/addProductPage';
 import { BuyerHomePage } from '@/pages/buyerHomePage';
 import { LandingPage } from '@/pages/landingPage';
-import { ManageProductsPage } from '@/pages/manageProductPage';
+import { ManageProductsPage } from '@/pages/manageProductsPage';
 import { SellerHomePage } from '@/pages/sellerHomePage';
 import { userIdTokenStorage } from '@/services/localStorage';
 
