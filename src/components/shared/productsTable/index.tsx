@@ -12,6 +12,7 @@ import {
 } from '@/components/ui/table';
 import { useAuth } from '@/hooks/useAuth';
 import { productsService } from '@/services/products';
+import { formatCurrency } from '@/utils/formatCurrency';
 
 import { BuyProductDialog } from './buyProductDialog';
 import { EditProductDialog } from './editProductDialog';
@@ -102,7 +103,7 @@ export function ProductsTable({ mode }: ProductsTableProps) {
                   {product.productName}
                 </TableCell>
                 <TableCell className="md:text-lg text-right">
-                  {product.cost}
+                  {formatCurrency(product.cost)}
                 </TableCell>
                 <TableCell className="md:text-lg text-right">
                   {product.amountAvailable}
