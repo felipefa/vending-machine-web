@@ -13,6 +13,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const depositFormatted = formatCurrency(user?.deposit);
 
+  function updateDeposit(deposit: number) {
+    setUser((oldUser) => (oldUser ? ({ ...user, deposit } as User) : oldUser));
+  }
+
   async function signUp(newUser: SignUpUser) {
     try {
       const userCreationRequest = await usersService.create(newUser);
@@ -128,6 +132,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
         signIn,
         signOut,
         signUp,
+        updateDeposit,
         user,
         userIdToken,
       }}

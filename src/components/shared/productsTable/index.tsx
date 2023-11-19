@@ -1,4 +1,4 @@
-import { ShoppingBasket, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import {
 import { useAuth } from '@/hooks/useAuth';
 import { productsService } from '@/services/products';
 
+import { BuyProductDialog } from './buyProductDialog';
 import { EditProductDialog } from './editProductDialog';
 import { Product, ProductsTableProps } from './types';
 
@@ -108,9 +109,10 @@ export function ProductsTable({ mode }: ProductsTableProps) {
                 </TableCell>
                 {mode === 'buy' && (
                   <TableCell className="text-right">
-                    <Button variant="outline">
-                      <ShoppingBasket className="h-4 w-4" />
-                    </Button>
+                    <BuyProductDialog
+                      product={product}
+                      setProducts={setProducts}
+                    />
                   </TableCell>
                 )}
                 {mode === 'manage' && (

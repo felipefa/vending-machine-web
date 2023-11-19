@@ -26,4 +26,10 @@ export const productsService = {
       method: 'DELETE',
       headers: { Authorization: `Bearer ${userIdToken}` },
     }),
+  buy: (productId: string, productAmount: number, userIdToken: string) =>
+    api('/buy', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${userIdToken}` },
+      data: { productAmount, productId },
+    }),
 };

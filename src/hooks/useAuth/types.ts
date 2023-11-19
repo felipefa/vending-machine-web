@@ -24,6 +24,7 @@ export type AuthContextData = {
   signIn: (email: string, password: string) => Promise<boolean>;
   signOut: () => boolean;
   signUp: (user: SignUpUser) => Promise<boolean>;
+  updateDeposit: (newDeposit: number) => void;
   user: User | null;
   userIdToken: string | null;
 };
