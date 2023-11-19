@@ -106,9 +106,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
       userStorage.remove();
       userIdTokenStorage.remove();
 
-      setUser(null);
-      setUserIdToken(null);
-
       window.location.reload();
 
       return true;
