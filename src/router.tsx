@@ -1,6 +1,7 @@
 import { createBrowserRouter, redirect } from 'react-router-dom';
 
 import { MainLayout } from '@/layout/mainLayout';
+import { AddCoinsPage } from '@/pages/addCoinsPage';
 import { AddProductPage } from '@/pages/addProductPage';
 import { BuyerHomePage } from '@/pages/buyerHomePage';
 import { BuyProductsPage } from '@/pages/buyProductsPage';
@@ -47,6 +48,11 @@ export const router = createBrowserRouter([
       {
         path: 'buyer',
         element: <BuyerHomePage />,
+        loader: checkLogin,
+      },
+      {
+        path: 'add-coins',
+        element: <AddCoinsPage />,
         loader: checkLogin,
       },
       {
